@@ -1,6 +1,6 @@
 var disqus_shortname = 'juanfutbol';
 var disqus_identifier;
-var disqus_url="social-network-football-league";
+var disqus_url="f0d7d6f3-ace2-4e58-b667-f2f022744a27";
 var disqus_number_c=2;
 var disqus_per_page=3;
 var tamaño_total=1920;
@@ -10,13 +10,46 @@ var numeroImages2=8;
  var intervalID2;
 var posicion_slider2=0;
 var share;
+var indepth_oculto=true;
+
+$(document).on("click","#indepth_boton_mas",function(){
+	var alto=0;
+		
+	if(indepth_oculto){
+		$("#indepth_playeras_ocultas .indepth_page_image").each(function(i, obj) { 
+			alto=$(obj).innerHeight()+alto;
+		});
+		$(this).addClass("indepth_ocultar");
+		indepth_oculto=false;
+		$("#indepth_playeras_ocultas").animate({height:(alto+100)+"px"},3000);
+	}else{
+		$(this).removeClass("indepth_ocultar");
+		var position = $("#indepth_playeras_ocultas").offset();
+		
+		$('html, body').animate({
+			scrollTop: ((position.top))
+			}, 2000);
+		
+		$("#indepth_playeras_ocultas").animate({height:(0)+"px"},2000);
+		indepth_oculto=true;
+	}
+	
+	
+
+});
+
+$(document).on("click",".indepth_ocultar",function(){
+	$("#indepth_playeras_ocultas").animate({height:"0px"},100);
+	$("#indepth_boton_mas").removeClass("indepth_ocultar");
+	indepth_oculto=true;
+})
 
 
 $(document).on("click", ".indepth_share_logos_item" ,function(){
 	var team=$(this).attr("red");
 	share=team;
 	var text='¡Yo le voy '+team+' FC! ¿Y tú a quién escoges? Conoce a todos los equipos de la Social Network Football League';
-	var url='http://juanfutbol.com/indepth/social-network-football-league?playeras_redes='+team+'&image='+urlIndepth+'images/'+team+'PLAYERA1.jpg';
+	var url='http://juanfutbol.com/indepth/nuevos-equipos-se-unen-a-la-Social-Network-Football-League?playeras_redes='+team+'&image='+urlIndepth+'images/'+team+'PLAYERA1.jpg';
 	console.log(url);
 	console.log(encodeURIComponent(url));
 	var img='<img src="'+urlIndepth+'images/'+team+'PLAYERA1.jpg">';
@@ -31,13 +64,13 @@ $(document).on("click", ".indepth_share_logos_item" ,function(){
 	
 	$(document).on("click", "#indepth_share_twiiter", function(){
 		var text = encodeURIComponent("¡Yo le voy "+share+" FC! ¿Y tú a quién escoges? Conoce a todos los equipos de la Social Network Football League");
-		var url = encodeURIComponent("http://juanfutbol.com/indepth/social-network-football-league");
+		var url = encodeURIComponent("http://juanfutbol.com/indepth/nuevos-equipos-se-unen-a-la-Social-Network-Football-League");
 		window.open("https://twitter.com/share?text="+text+"&url="+url,"","width=500, height=300");
 		}
 	);
 	
 	$(document).on("click", "#indepth_share_fb", function(){
-		var url = encodeURIComponent("http://juanfutbol.com/indepth/social-network-football-league?playeras_redes="+share+"&image="+urlIndepth+"images/"+share+"PLAYERA1.jpg");
+		var url = encodeURIComponent("http://juanfutbol.com/indepth/nuevos-equipos-se-unen-a-la-Social-Network-Football-League?playeras_redes="+share+"&image="+urlIndepth+"images/"+share+"PLAYERA1.jpg");
 		window.open("https://www.facebook.com/sharer/sharer.php?u="+url,"","width=500, height=300");
 
 	});
